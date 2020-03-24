@@ -1,5 +1,5 @@
 # 基础镜像
-FROM hollisho/centos:lastest
+FROM hollisho/centos:latest
 
 # 维护者
 MAINTAINER Hollis Ho "he_wenzhi@126.com"
