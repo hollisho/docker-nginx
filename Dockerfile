@@ -2,7 +2,7 @@
 FROM hollisho/centos:lastest
 
 # 维护者
-MAINTAINER Hollis "he_wenzhi@126.com"
+MAINTAINER Hollis Ho "he_wenzhi@126.com"
 
 # 安装wget下载工具
 RUN yum install -y wget 
@@ -46,6 +46,7 @@ WORKDIR /usr/local/openresty/nginx/conf
 # 建立子配置文件夹，个人爱好，可以不建，或者叫其它名称都可以，但最好不要带特殊符号,
 RUN mkdir conf.d
 
+COPY conf ./conf
 
 # 设置变量，执行命令时，就可以省略前缀目录了 
 ENV PATH /usr/local/openresty/nginx/sbin:$PATH
