@@ -20,10 +20,10 @@ RUN tar zxvf openresty-1.15.8.2.tar.gz
 WORKDIR /usr/local/src/openresty-1.15.8.2
 
 # 更新yum，可不执行
-RUN yum -y update 
+#RUN yum -y update 
 
 # 安装必要的软件和添加nginx用户
-RUN yum install -y readline-devel pcre-devel openssl-devel gcc perl postgresql-devel
+RUN yum install -y readline-devel pcre-devel openssl-devel gcc-c++ make autoconf automake perl postgresql-devel
 RUN  useradd -M -s /sbin/nologin nginx
 
 # 挂载卷，测试用例（这里的挂载卷，不可以指定本机的目录，不够灵活，一般会在 启动容器时通过 -v 参数指定挂载卷，或在docker-compose.yaml文件中指定，都可以指定本地目录）
@@ -40,13 +40,15 @@ RUN ./configure\
  --with-http_postgres_module &&\
  make && make install
 
+
 # 切换到Nginx的配置目录
 WORKDIR /usr/local/openresty/nginx/conf
 
 # 建立子配置文件夹，个人爱好，可以不建，或者叫其它名称都可以，但最好不要带特殊符号,
 RUN mkdir conf.d
 
-COPY conf ./conf
+COPY conf/conf.d ./conf.d
+COPY conf/nginx.conf ./nginx.conf
 
 # 设置变量，执行命令时，就可以省略前缀目录了 
 ENV PATH /usr/local/openresty/nginx/sbin:$PATH
