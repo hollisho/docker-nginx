@@ -57,8 +57,5 @@ ENV PATH /usr/local/openresty/nginx/sbin:$PATH
 # 暴露端口
 EXPOSE 80 443
 
-# the command of entrypoint
-ENTRYPOINT ["nginx"]
-
 # 执行命令，数组形式， "-g daemon off;" 使我们运行容器时，容器可以前台运行，不会退出
-CMD ["-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]
